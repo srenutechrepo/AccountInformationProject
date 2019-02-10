@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/rtp4203" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>   
+      
+    <bean id="sessionFactory" 
+     class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >  
+        <property name="dataSource" ref="dataSource"></property>  
+          
+       <!--  <property name="mappingResources">  
+        <list>  
+        <value>employee.hbm.xml</value>  
+        </list>  
+        </property> hbm.xml files for creating entities-->
+
+      <!--   <property name="annotatedClasses">
+			<list>
+				<value>com.ashish.entity.EmployeeEntity</value>
+				<value>com.ashish.entity.EmployeeAllocationEntity</value>
+			</list>
+	</property> --> 
+ 
+    <property name="packagesToScan" value="com.tesco.offers.account.balance.dao.entities"></property>
+
+<!--  <property name="packagesToScan"> // for different packages of entities
+         <array>
+              <value>com.test1</value>
+              <value>com.test2</value>
+         </array>
+     </property> -->
+
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>  
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.show_sql">true</prop>  
+                  
+            </props>  
+        </property>  
+    </bean> 
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+            <property name="sessionFactory" ref="sessionFactory"></property>     
+    </bean> 
+</beans>
