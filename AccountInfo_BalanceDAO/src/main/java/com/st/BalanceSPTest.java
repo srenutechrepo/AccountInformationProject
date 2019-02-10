@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-
+// done from ecclipse tool
 public class BalanceSPTest {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
